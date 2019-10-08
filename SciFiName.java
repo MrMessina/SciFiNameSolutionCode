@@ -10,7 +10,7 @@ public class SciFiName
 {
     /**
      * All input that you privide should be at least three letters long
-     * or the program may crash (feel free to test this!)
+     * or the program may crash (but feel free to test this!)
      * 
      * For best results, user lowercase letters and do not use spaces in your input
      */
@@ -20,7 +20,7 @@ public class SciFiName
         System.out.println("Please have all responses  be at least three characters long.");
         System.out.println("For best results, user lowercase letters with no spaces.\n");
 
-        // notice this methd (print) does not print a newline
+        //notice this method (print) does not print a newline
         System.out.print("Enter your first name: ");
         String firstName = UserInput.getString();
         System.out.print("Enter your last name: ");
@@ -34,36 +34,39 @@ public class SciFiName
         System.out.print("Enter the first name of a second sibling or relative: ");
         String relativeName2 = UserInput.getString();
 
-        // generate a sciFi name
-        String sciFiFirstName = firstName.substring(0,3) + lastName.substring(0,2);
-        String sciFiLastName = city.substring(0,2) + school.substring(0,3);
-        int len1 = relativeName1.length()-1;
-        int len2 = relativeName2.length()-1;
-        int r1 = (int)(Math.random() * len1) + 1;
-        int r2 = (int)(Math.random() * len2) + 1;
-        // are your random numbers correct?
-        // System.out.println("r1=" + r1 + " r2=" + r2);
-        String sciFiPlaceOfOrigin = relativeName1.substring(r1) + relativeName2.substring(r2);
-
-        /* BEGIN OPTIONAL algorithm using String.toLowerCase */
-        sciFiFirstName = sciFiFirstName.toLowerCase();
-        sciFiLastName = sciFiLastName.toLowerCase();
-        sciFiPlaceOfOrigin = sciFiPlaceOfOrigin.toLowerCase();
-        /* END OPTIONAL algorithm using String.toLowerCase */
-                
-        /* BEGIN OPTIONAL algorithm using String.toUpperCase */
-        String firstLetter  = sciFiFirstName.substring(0,1);
-        sciFiFirstName = firstLetter.toUpperCase() + sciFiFirstName.substring(1);
-
-        firstLetter  = sciFiLastName.substring(0,1);
-        sciFiLastName = firstLetter.toUpperCase() + sciFiLastName.substring(1);
-
-        firstLetter  = sciFiPlaceOfOrigin.substring(0,1);
-        sciFiPlaceOfOrigin = firstLetter.toUpperCase() + sciFiPlaceOfOrigin.substring(1);
-        /* END OPTIONAL algorithm using String.toUpperCase */
-
-        System.out.println("\n\nHello " + 
-            sciFiFirstName + " " + sciFiLastName +
-            " of " + sciFiPlaceOfOrigin + ". Welcome!");      
+        
+        //variable is initialized to the first three letters of users name
+        String firstThreeFirst = firstName.substring(firstName.indexOf(firstName),3);
+        // variable is initialized to the frst two letters of users last name
+        String firstTwoLast = lastName.substring(lastName.indexOf(lastName), 2);
+        // makes the new "sci-fi name" by concatenating the two previous variables
+        String scifiFirst = (firstThreeFirst + firstTwoLast).toLowerCase();
+        
+        
+        
+        // next three lines creating the scifi last name
+        String firstTwoCity = city.substring(city.indexOf(city), 2); 
+        
+        String firstTwoSchool = school.substring(school.indexOf(school), 3);
+        
+        String scifiLast = (firstTwoCity  + firstTwoSchool).toLowerCase();
+        
+        // creating the random number that is used for the boundaries in the method ".substring()"
+        int randNum1 = (int)(Math.random() * relativeName1.length()) + 1;
+        int randNum2 = (int)(Math.random() * relativeName2.length()) + 1;
+        
+        String randRelative1 = relativeName1.substring(randNum1, relativeName1.length());
+      
+        String randRelative2  = relativeName2.substring(randNum2, relativeName2.length());
+        
+        String scifiOrigin = randRelative1 + randRelative2;
+        String capFirstOrigin = (scifiOrigin.substring(0,1)).toUpperCase();
+        String capitalOrigin = capFirstOrigin + scifiOrigin.substring(1);
+        
+        
+        System.out.println("Hello " + scifiFirst + " " + scifiLast + " of "  + capitalOrigin + ". Welcome!");
+        
+   
+        
     }
 }
